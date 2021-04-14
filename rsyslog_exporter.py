@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Export rsyslog counters as prometheus metrics (impstats via omprog)
 
@@ -154,8 +154,8 @@ class RsyslogCollector(object):
 
     @COLLECT_TIME.time()
     def collect(self):
-        custom_label_names = self._stats.labels.keys()
-        custom_label_values = self._stats.labels.values()
+        custom_label_names = list(self._stats.labels.keys())
+        custom_label_values = list(self._stats.labels.values())
 
         m = GaugeMetricFamily(
             'rsyslog_exporter_version',
@@ -313,8 +313,8 @@ def main():
                 while keep_running and sys.stdin in select.select([sys.stdin], [], [], 0)[0]:
                     line = sys.stdin.readline()
                     if line:
-                        json_start_idx = line.find('{')
-                        json_end_idx = line.rfind('}')
+                        json_start_idx = line.find(b'{')
+                        json_end_idx = line.rfind(b'}')
                         stats.parse(line[json_start_idx:json_end_idx + 1])
                     else:
                         # Exit when EOF received on stdin
