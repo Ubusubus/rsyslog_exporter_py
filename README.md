@@ -40,3 +40,7 @@ Please note `rsyslog_exporter.py` command line parameters:
 ### 4. Restart rsyslog if no errors found (`systemctl restart rsyslog` e.g.)
 ### 5. Go to http://localhost:9292/ to see metrics
 
+## Changelog
+
+- 1.1 - python3 support
+- 1.0 - initial version
